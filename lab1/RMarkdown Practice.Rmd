@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Let's try some arithmetic
 
 ```{r}
-(4*123*4)/64
+4*123*4
 ```
 
 ## **bold** _italics_ **Hello world!**
