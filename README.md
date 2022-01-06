@@ -7,10 +7,11 @@ Welcome to my repository! Most of it is in an unfinished state as I progress thr
 
 # Other Links:
 [LinkedIn](https://www.linkedin.com/in/johnabramflores)
+
 [Rickroll Remastered](https://www.youtube.com/watch?v=o-YBDTqX_ZU)
 
 # Thanks!
-
+!(.)[BIS15W2022_jledford_JFlores/penguin.gif)
 Contact me through email if you have any questions!
 
 **Go Aggies!**
