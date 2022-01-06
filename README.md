@@ -3,7 +3,7 @@
 Welcome to my repository! Most of it is in an unfinished state as I progress through this class, but you will see more updates as the quarter progresses.
 
 # Contact Info
-[Email](jabflores@ucdavis.edu)
+[Email](mailto:jabflores@ucdavis.edu)
 
 # Other Links:
 [LinkedIn](https://www.linkedin.com/in/johnabramflores)
