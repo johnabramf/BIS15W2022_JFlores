@@ -62,7 +62,15 @@ pi*2
 x <- c(2, 8, 6, 6, 7, 4, 9, 9, 9, 10)
 ```
 
+```{r}
+mean(x)
+```
+
 **10. Repeat the procedure above, but this time calculate the median.**  
+```{r}
+x <- c(2, 8, 6, 6, 7, 4, 9, 9, 9, 10)
+```
+
 ```{r}
 median(x)
 ```
