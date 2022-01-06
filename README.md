@@ -14,5 +14,3 @@ Welcome to my repository! Most of it is in an unfinished state as I progress thr
 Contact me through email if you have any questions!
 
 **Go Aggies!**
-
-
