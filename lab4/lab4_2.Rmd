@@ -26,6 +26,11 @@ In the previous lab, we used `select()` to extract columns of interest from a da
 library("tidyverse")
 ```
 
+```{r}
+#install.packages("janitor")
+library("janitor")
+```
+
 ## Load the data
 For these exercises we will use the data from lab 4_1.  
 ```{r}
@@ -38,9 +43,15 @@ To keep things tidy, I am going to rename the variables in the mammals data.
 mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. life", litter_size="litter size", litters_per_year="litters/year")
 ```
 
+```{r}
+mammals <- clean_names(mammals)
+mammals # Janitory very useful in cleaning up variables!
+```
+
 ## `filter()`
 Unlike `select()`, `filter()` allows us to extract data that meet specific criteria within a variable. Let's say that we are interested only in the fish that occur in lake "AL". We can use `filter()` to extract these observations.  
 ```{r}
+fish
 filter(fish, lakeid == "AL")
 ```
 
@@ -75,33 +86,33 @@ filter(fish, near(radii_length_mm, 2, tol = 0.2))
 ## Practice
 1. Filter the `fish` data to include the samples from lake "BO".
 ```{r}
-
+filter(fish, lakeid == "BO")
 ```
 
 2. Filter the data to include all lakes except "AR".
 ```{r}
-
+filter(fish, !lakeid == "BO")
 ```
 
 3. Filter the fish data to include all fish with a scalelength within 0.25 of 8.
 ```{r}
-
+filter(fish, between(scalelength, 0.25, 8))
 ```
 
 4. Filter the fish data to include fish with a scalelength between 2 and 4.
 ```{r}
-
+filter(fish, near(scalelength, 3, tol=1))
 ```
 
 ## Using `filter()` on multiple conditions
 You can also use `filter()` to extract data based on multiple conditions. Below we extract only the fish that have lakeid "AL" and length >350.
 ```{r}
-filter(fish, lakeid == "AL" & length > 350)
+filter(fish, lakeid == "AL" & length > 350) #AL AND 350
 ```
 
 Notice that the `|` operator generates a different result.
 ```{r}
-filter(fish, lakeid == "AL" | length > 350)
+filter(fish, lakeid == "AL" | length > 350) #AL OR length 350 greater
 ```
 
 Rules:  
@@ -118,12 +129,12 @@ filter(fish, length > 400, (scalelength > 11 | radii_length_mm > 8))
 ## Practice  
 1. Have a look at the mammals data using the summary functions of your choosing.    
 ```{r}
-
+glimpse(mammals)
 ```
 
 2. What are the names of the variables in the mammals data?  
 ```{r}
-
+names(mammals)
 ```
 
 3.  From the `mammals` data, filter all members of the family Bovidae with a mass greater than 450000.
