@@ -2,10 +2,11 @@
 title: "Transforming data 2: `filter()`"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -139,26 +140,29 @@ names(mammals)
 
 3.  From the `mammals` data, filter all members of the family Bovidae with a mass greater than 450000.
 ```{r}
-
+filter(mammals, family == "Bovidiae" | mass>=450000)
 ```
 
 4. Let's say we are only interested in family, genus, species, mass, and gestation. Relimit the mammals data frame to these variables.  
 ```{r}
-
+fgsmg_mammals <- select(mammals, "family", "genus", "species", "mass", "gestation")
+fgsmg_mammals
 ```
 
 5. Use the output from #4 to focus on the family Bovidae with a mass greater than 450000.
 ```{r}
-
+filter(fgsmg_mammals, family == "Bovidae" | mass>=450000)
 ```
 
 6. From the `mammals` data, build a data frame that compares `mass`, `gestation`, and `newborn` among the primate genera `Lophocebus`, `Erythrocebus`, and `Macaca`. Among these genera, which species has the smallest `newborn` mass?
 ```{r}
-
+mgn_mammals <- select(mammals, "mass", "gestation", "newborn", "genus")
+mgn_question_6_mammals <- filter(mgn_mammals, genus == "Lophocebus" | genus == "Erythrocebus" | genus == "Macaca")
+mgn_question_6_mammals
 ```
 
 ```{r}
-
+min(mgn_question_6_mammals$newborn) # 389.5 kg
 ```
 
 ## Wrap-up  
