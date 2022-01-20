@@ -38,7 +38,7 @@ superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-9
 1. Some of the names used in the `superhero_info` data are problematic so you should rename them here.  
 ```{r}
 names(superhero_info)
-superhero_info <- clean_names(superhero_info)
+superhero_info <- janitor::clean_names(superhero_info)
 names(superhero_info)
 ```
 
@@ -135,7 +135,7 @@ superhero_info %>%
 ```
 
 12. ...and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?
-*There isn't 16 rows of entries in question 10 because there is some overlap between superheros and supervillains, as some of them may fit both conditions.*
+*There isn't 16 rows of entries in question 10 because there is some overlap between superheros and supervillains, as some of them may fit both conditions. In addition, question 11 looks for superheros over a height of 300, but question 10 looks for either a height of 200 (not 300) or a weight of over 450.*
 ```{r}
 superhero_info %>%
   filter(weight>450)
@@ -143,7 +143,7 @@ superhero_info %>%
 
 ## Height to Weight Ratio
 13. It's easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?
-*Groot has the highest height to weight ratio*
+*Groot has the highest height to weight ratio at 175.25. Giganta have the lowest height to weight ratio, indicating tahtthat she is short compared to her weight.*
 ```{r}
 superhero_info %>%
   mutate(height_to_weight = height/weight) %>%

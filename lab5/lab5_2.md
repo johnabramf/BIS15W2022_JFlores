@@ -9,6 +9,17 @@ output:
     keep_md: yes
 ---
 
+## Breakout Rooms  
+Please take 5-8 minutes to check over your answers to the HW in your group. If you are stuck, please remember that you can check the key in [Joel's repository](https://github.com/jmledford3115/BIS15LW2021_jledford).  
+
+## Learning Goals  
+*At the end of this exercise, you will be able to:*    
+1. Develop your dplyr superpowers so you can easily and confidently manipulate dataframes.  
+2. Learn helpful new functions that are part of the `janitor` package.  
+
+## Instructions
+For the second part of lab 5 today, we are going to spend time practicing the dplyr functions we have learned and add a few new ones. We will spend most of the time in our breakout rooms. Your lab 5 homework will be to knit and push this file to your repository.  
+
 ## Load the tidyverse
 
 ```r
