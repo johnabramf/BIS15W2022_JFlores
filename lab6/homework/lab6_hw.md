@@ -1,7 +1,7 @@
 ---
 title: "Lab 6 Homework"
 author: "John Abram Flores"
-date: "2022-01-22"
+date: "2022-01-23"
 output:
   html_document: 
     theme: spacelab
@@ -36,7 +36,7 @@ fisheries <- readr::read_csv(file = "data/FAO_1950to2012_111914.csv")
 ```
 
 ```
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## Delimiter: ","
 ## chr (69): Country, Common name, ISSCAAP taxonomic group, ASFIS species#, ASF...
 ## dbl  (2): ISSCAAP group#, FAO major fishing area
@@ -44,8 +44,8 @@ fisheries <- readr::read_csv(file = "data/FAO_1950to2012_111914.csv")
 
 ```
 ## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 1. Do an exploratory analysis of the data (your choice). What are the names of the variables, what are the dimensions, are there any NA's, what are the classes of the variables?  
@@ -223,7 +223,7 @@ str(fisheries)
 ```
 
 ```
-## spec_tbl_df [17,692 × 71] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+## spec_tbl_df [17,692 x 71] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ country                : Factor w/ 204 levels "Albania","Algeria",..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ common_name            : chr [1:17692] "Angelsharks, sand devils nei" "Atlantic bonito" "Barracudas nei" "Blue and red shrimp" ...
 ##  $ isscaap_group_number   : Factor w/ 30 levels "11","12","21",..: 14 12 13 19 8 13 9 19 14 26 ...
@@ -390,94 +390,164 @@ fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
 ```
 
 3. How many countries are represented in the data? Provide a count and list their names.
-*There are a total of 203 countries, represented by the 203 row entries in the fisheries_tidy data frame when sorting by count().*
+*There are a total of 204 countries, represented by the 204 total names listed below.*
 
 ```r
-fisheries_tidy %>%
-  count(country, sort = T)
+levels(fisheries_tidy$country)
 ```
 
 ```
-## # A tibble: 203 × 2
-##    country                      n
-##    <fct>                    <int>
-##  1 United States of America 18080
-##  2 Spain                    17482
-##  3 Japan                    15429
-##  4 Portugal                 11570
-##  5 Korea, Republic of       10824
-##  6 France                   10639
-##  7 Taiwan Province of China  9927
-##  8 Indonesia                 9274
-##  9 Australia                 8183
-## 10 Un. Sov. Soc. Rep.        7084
-## # … with 193 more rows
+##   [1] "Albania"                   "Algeria"                  
+##   [3] "American Samoa"            "Angola"                   
+##   [5] "Anguilla"                  "Antigua and Barbuda"      
+##   [7] "Argentina"                 "Aruba"                    
+##   [9] "Australia"                 "Bahamas"                  
+##  [11] "Bahrain"                   "Bangladesh"               
+##  [13] "Barbados"                  "Belgium"                  
+##  [15] "Belize"                    "Benin"                    
+##  [17] "Bermuda"                   "Bonaire/S.Eustatius/Saba" 
+##  [19] "Bosnia and Herzegovina"    "Brazil"                   
+##  [21] "British Indian Ocean Ter"  "British Virgin Islands"   
+##  [23] "Brunei Darussalam"         "Bulgaria"                 
+##  [25] "C<f4>te d'Ivoire"          "Cabo Verde"               
+##  [27] "Cambodia"                  "Cameroon"                 
+##  [29] "Canada"                    "Cayman Islands"           
+##  [31] "Channel Islands"           "Chile"                    
+##  [33] "China"                     "China, Hong Kong SAR"     
+##  [35] "China, Macao SAR"          "Colombia"                 
+##  [37] "Comoros"                   "Congo, Dem. Rep. of the"  
+##  [39] "Congo, Republic of"        "Cook Islands"             
+##  [41] "Costa Rica"                "Croatia"                  
+##  [43] "Cuba"                      "Cura<e7>ao"               
+##  [45] "Cyprus"                    "Denmark"                  
+##  [47] "Djibouti"                  "Dominica"                 
+##  [49] "Dominican Republic"        "Ecuador"                  
+##  [51] "Egypt"                     "El Salvador"              
+##  [53] "Equatorial Guinea"         "Eritrea"                  
+##  [55] "Estonia"                   "Ethiopia"                 
+##  [57] "Falkland Is.(Malvinas)"    "Faroe Islands"            
+##  [59] "Fiji, Republic of"         "Finland"                  
+##  [61] "France"                    "French Guiana"            
+##  [63] "French Polynesia"          "French Southern Terr"     
+##  [65] "Gabon"                     "Gambia"                   
+##  [67] "Georgia"                   "Germany"                  
+##  [69] "Ghana"                     "Gibraltar"                
+##  [71] "Greece"                    "Greenland"                
+##  [73] "Grenada"                   "Guadeloupe"               
+##  [75] "Guam"                      "Guatemala"                
+##  [77] "Guinea"                    "GuineaBissau"             
+##  [79] "Guyana"                    "Haiti"                    
+##  [81] "Honduras"                  "Iceland"                  
+##  [83] "India"                     "Indonesia"                
+##  [85] "Iran (Islamic Rep. of)"    "Iraq"                     
+##  [87] "Ireland"                   "Isle of Man"              
+##  [89] "Israel"                    "Italy"                    
+##  [91] "Jamaica"                   "Japan"                    
+##  [93] "Jordan"                    "Kenya"                    
+##  [95] "Kiribati"                  "Korea, Dem. People's Rep" 
+##  [97] "Korea, Republic of"        "Kuwait"                   
+##  [99] "Latvia"                    "Lebanon"                  
+## [101] "Liberia"                   "Libya"                    
+## [103] "Lithuania"                 "Madagascar"               
+## [105] "Malaysia"                  "Maldives"                 
+## [107] "Malta"                     "Marshall Islands"         
+## [109] "Martinique"                "Mauritania"               
+## [111] "Mauritius"                 "Mayotte"                  
+## [113] "Mexico"                    "Micronesia, Fed.States of"
+## [115] "Monaco"                    "Montenegro"               
+## [117] "Montserrat"                "Morocco"                  
+## [119] "Mozambique"                "Myanmar"                  
+## [121] "Namibia"                   "Nauru"                    
+## [123] "Netherlands"               "Netherlands Antilles"     
+## [125] "New Caledonia"             "New Zealand"              
+## [127] "Nicaragua"                 "Nigeria"                  
+## [129] "Niue"                      "Norfolk Island"           
+## [131] "Northern Mariana Is."      "Norway"                   
+## [133] "Oman"                      "Other nei"                
+## [135] "Pakistan"                  "Palau"                    
+## [137] "Palestine, Occupied Tr."   "Panama"                   
+## [139] "Papua New Guinea"          "Peru"                     
+## [141] "Philippines"               "Pitcairn Islands"         
+## [143] "Poland"                    "Portugal"                 
+## [145] "Puerto Rico"               "Qatar"                    
+## [147] "R<e9>union"                "Romania"                  
+## [149] "Russian Federation"        "Saint Barth<e9>lemy"      
+## [151] "Saint Helena"              "Saint Kitts and Nevis"    
+## [153] "Saint Lucia"               "Saint Vincent/Grenadines" 
+## [155] "SaintMartin"               "Samoa"                    
+## [157] "Sao Tome and Principe"     "Saudi Arabia"             
+## [159] "Senegal"                   "Serbia and Montenegro"    
+## [161] "Seychelles"                "Sierra Leone"             
+## [163] "Singapore"                 "Sint Maarten"             
+## [165] "Slovenia"                  "Solomon Islands"          
+## [167] "Somalia"                   "South Africa"             
+## [169] "Spain"                     "Sri Lanka"                
+## [171] "St. Pierre and Miquelon"   "Sudan"                    
+## [173] "Sudan (former)"            "Suriname"                 
+## [175] "Svalbard and Jan Mayen"    "Sweden"                   
+## [177] "Syrian Arab Republic"      "Taiwan Province of China" 
+## [179] "Tanzania, United Rep. of"  "Thailand"                 
+## [181] "TimorLeste"                "Togo"                     
+## [183] "Tokelau"                   "Tonga"                    
+## [185] "Trinidad and Tobago"       "Tunisia"                  
+## [187] "Turkey"                    "Turks and Caicos Is."     
+## [189] "Tuvalu"                    "Ukraine"                  
+## [191] "Un. Sov. Soc. Rep."        "United Arab Emirates"     
+## [193] "United Kingdom"            "United States of America" 
+## [195] "Uruguay"                   "US Virgin Islands"        
+## [197] "Vanuatu"                   "Venezuela, Boliv Rep of"  
+## [199] "Viet Nam"                  "Wallis and Futuna Is."    
+## [201] "Western Sahara"            "Yemen"                    
+## [203] "Yugoslavia SFR"            "Zanzibar"
 ```
 
 4. Refocus the data only to include country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch.
 
 ```r
-fisheries_tidy %>%
-  select(country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch)
-```
-
-```
-## # A tibble: 376,771 × 6
-##    country isscaap_taxonomic_group asfis_species_n… asfis_species_n…  year catch
-##    <fct>   <chr>                   <chr>            <fct>            <dbl> <dbl>
-##  1 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1995    NA
-##  2 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1996    53
-##  3 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1997    20
-##  4 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1998    31
-##  5 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1999    30
-##  6 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2000    30
-##  7 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2001    16
-##  8 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2002    79
-##  9 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2003     1
-## 10 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2004     4
-## # … with 376,761 more rows
+fisheries_tidy_f <- select(fisheries_tidy, country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch)
 ```
 
 5. Based on the asfis_species_number, how many distinct fish species were caught as part of these data?
-*By piping the fisheries_tidy data frame into a summarise() command, we see that there are 1551 distinct fish species caught in this data.*
+*By piping the fisheries_tidy data frame into a summarise()  with n_distinct, we see that there are 1551 distinct fish species caught in this data.*
 
 ```r
-fisheries_tidy %>%
+fisheries_tidy_f %>%
   summarise(total_distinct = n_distinct(asfis_species_number))
 ```
 
 ```
-## # A tibble: 1 × 1
+## # A tibble: 1 x 1
 ##   total_distinct
 ##            <int>
 ## 1           1551
 ```
 
 6. Which country had the largest overall catch in the year 2000?
-*From running an arrange() command in descending order for 'catch' in the year 2000, we see that China had the largest overall catch of Marine fishes nei, with 9068 in the year 2000 alone.*
+*By running a summarize() command to sum all catches by country, we see that China had the largest overal catch in the year 200 with 25889 total fish caught.*
 
 ```r
-fisheries_tidy %>%
-  select(year,catch,country,common_name) %>%
+fisheries_tidy_f %>%
+  select(year,catch,country) %>%
   filter(year==2000) %>%
-  arrange(desc(catch))
+  group_by(country) %>%
+  summarize(year2k_overall_catch = sum(catch, na.rm=TRUE)) %>%
+  slice_max(year2k_overall_catch, n=10)
 ```
 
 ```
-## # A tibble: 8,793 × 4
-##     year catch country                  common_name                   
-##    <dbl> <dbl> <fct>                    <chr>                         
-##  1  2000  9068 China                    Marine fishes nei             
-##  2  2000  5717 Peru                     Anchoveta(=Peruvian anchovy)  
-##  3  2000  5065 Russian Federation       Alaska pollock(=Walleye poll.)
-##  4  2000  4945 Viet Nam                 Marine fishes nei             
-##  5  2000  4299 Chile                    Chilean jack mackerel         
-##  6  2000  3288 China                    Marine molluscs nei           
-##  7  2000  2782 China                    Largehead hairtail            
-##  8  2000  2438 United States of America Alaska pollock(=Walleye poll.)
-##  9  2000  1234 China                    Marine crustaceans nei        
-## 10  2000   999 Philippines              Scads nei                     
-## # … with 8,783 more rows
+## # A tibble: 10 x 2
+##    country                  year2k_overall_catch
+##    <fct>                                   <dbl>
+##  1 China                                   25899
+##  2 Russian Federation                      12181
+##  3 United States of America                11762
+##  4 Japan                                    8510
+##  5 Indonesia                                8341
+##  6 Peru                                     7443
+##  7 Chile                                    6906
+##  8 India                                    6351
+##  9 Thailand                                 6243
+## 10 Korea, Republic of                       6124
 ```
 
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
@@ -493,7 +563,7 @@ fisheries_tidy %>%
 ```
 
 ```
-## # A tibble: 10 × 2
+## # A tibble: 10 x 2
 ##    country               sardine_sum
 ##    <fct>                       <dbl>
 ##  1 Morocco                      7470
@@ -522,7 +592,7 @@ fisheries_tidy %>%
 ```
 
 ```
-## # A tibble: 10 × 2
+## # A tibble: 10 x 2
 ##    country                  cephalopod_sum_by_group
 ##    <fct>                                      <dbl>
 ##  1 China                                       8349
@@ -550,7 +620,7 @@ fisheries_tidy %>%
 ```
 
 ```
-## # A tibble: 20 × 2
+## # A tibble: 20 x 2
 ##    asfis_species_name     total_species_catch
 ##    <chr>                                <dbl>
 ##  1 Theragra chalcogramma                41075
@@ -576,7 +646,7 @@ fisheries_tidy %>%
 ```
 
 10. Use the data to do at least one analysis of your choice.
-*With the data, I chose to look at the most caught species of shark, ray, or chimaeras (class of Chondrichthyes) between the years 1972 and 2002. The Elasmobranchii, Rajiformes, Raja spp, and Squalus acanthias are not specific species, and the highest actual species is the Isuru oxyrinchus, or more commonly known as shortfin mako shark, with 4444.*
+*With the data, I chose to look at the most caught species of shark, ray, or chimaeras (class of Chondrichthyes) between the years 1972 and 2002. The Elasmobranchii, Rajiformes, and Raja spp are not specific species, and the highest actual species is the Squalus acanthias, or the spiny dogfish, with a total catch of 7522 in the year span.*
 
 
 ```r
@@ -589,7 +659,7 @@ fisheries_tidy %>%
 ```
 
 ```
-## # A tibble: 10 × 2
+## # A tibble: 10 x 2
 ##    asfis_species_name total_shark_catch
 ##    <chr>                          <dbl>
 ##  1 Elasmobranchii                 48447
