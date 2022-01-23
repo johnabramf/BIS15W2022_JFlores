@@ -1,7 +1,7 @@
 ---
 title: "Lab 6 Homework"
-author: "Joel Ledford"
-date: "2022-01-17"
+author: "John Abram Flores"
+date: "2022-01-22"
 output:
   html_document: 
     theme: spacelab
@@ -49,54 +49,560 @@ fisheries <- readr::read_csv(file = "data/FAO_1950to2012_111914.csv")
 ```
 
 1. Do an exploratory analysis of the data (your choice). What are the names of the variables, what are the dimensions, are there any NA's, what are the classes of the variables?  
+*The dimensions of the data frame are shown by dim(), the names and classes of variables are shown by summary(), and we check NA's by running anyNA(), which outputs TRUE, informing us that there are NA's present.*
 
+```r
+dim(fisheries)
+```
+
+```
+## [1] 17692    71
+```
+
+```r
+summary(fisheries)
+```
+
+```
+##    Country          Common name        ISSCAAP group#  ISSCAAP taxonomic group
+##  Length:17692       Length:17692       Min.   :11.00   Length:17692           
+##  Class :character   Class :character   1st Qu.:33.00   Class :character       
+##  Mode  :character   Mode  :character   Median :36.00   Mode  :character       
+##                                        Mean   :37.38                          
+##                                        3rd Qu.:38.00                          
+##                                        Max.   :77.00                          
+##  ASFIS species#     ASFIS species name FAO major fishing area
+##  Length:17692       Length:17692       Min.   :18.00         
+##  Class :character   Class :character   1st Qu.:31.00         
+##  Mode  :character   Mode  :character   Median :37.00         
+##                                        Mean   :45.34         
+##                                        3rd Qu.:57.00         
+##                                        Max.   :88.00         
+##    Measure              1950               1951               1952          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1953               1954               1955               1956          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1957               1958               1959               1960          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1961               1962               1963               1964          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1965               1966               1967               1968          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1969               1970               1971               1972          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1973               1974               1975               1976          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1977               1978               1979               1980          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1981               1982               1983               1984          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1985               1986               1987               1988          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1989               1990               1991               1992          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1993               1994               1995               1996          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      1997               1998               1999               2000          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      2001               2002               2003               2004          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      2005               2006               2007               2008          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      2009               2010               2011               2012          
+##  Length:17692       Length:17692       Length:17692       Length:17692      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+## 
+```
+
+```r
+anyNA(fisheries)
+```
+
+```
+## [1] TRUE
+```
 
 2. Use `janitor` to rename the columns and make them easier to use. As part of this cleaning step, change `country`, `isscaap_group_number`, `asfis_species_number`, and `fao_major_fishing_area` to data class factor. 
 
+*I first clean up the column names using janitor's clean_names(df) command.*
 
+```r
+fisheries <- janitor::clean_names(fisheries)
+```
+*Then, I set the columns that we will observe to factors using as.factor().*
 
+```r
+fisheries$country <- as.factor(fisheries$country)
+fisheries$isscaap_group_number <- as.factor(fisheries$isscaap_group_number)
+fisheries$asfis_species_number <- as.factor(fisheries$asfis_species_number)
+fisheries$fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
+```
+
+*I double check that the factor setting worked using str(fisheries). The variables we set earlier show up as factors!*
+
+```r
+str(fisheries)
+```
+
+```
+## spec_tbl_df [17,692 × 71] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ country                : Factor w/ 204 levels "Albania","Algeria",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ common_name            : chr [1:17692] "Angelsharks, sand devils nei" "Atlantic bonito" "Barracudas nei" "Blue and red shrimp" ...
+##  $ isscaap_group_number   : Factor w/ 30 levels "11","12","21",..: 14 12 13 19 8 13 9 19 14 26 ...
+##  $ isscaap_taxonomic_group: chr [1:17692] "Sharks, rays, chimaeras" "Tunas, bonitos, billfishes" "Miscellaneous pelagic fishes" "Shrimps, prawns" ...
+##  $ asfis_species_number   : Factor w/ 1553 levels "1020100101","1020100201",..: 92 970 1068 1256 398 581 817 1228 27 1499 ...
+##  $ asfis_species_name     : chr [1:17692] "Squatinidae" "Sarda sarda" "Sphyraena spp" "Aristeus antennatus" ...
+##  $ fao_major_fishing_area : Factor w/ 19 levels "18","21","27",..: 6 6 6 6 6 6 6 6 6 6 ...
+##  $ measure                : chr [1:17692] "Quantity (tonnes)" "Quantity (tonnes)" "Quantity (tonnes)" "Quantity (tonnes)" ...
+##  $ x1950                  : chr [1:17692] NA NA NA NA ...
+##  $ x1951                  : chr [1:17692] NA NA NA NA ...
+##  $ x1952                  : chr [1:17692] NA NA NA NA ...
+##  $ x1953                  : chr [1:17692] NA NA NA NA ...
+##  $ x1954                  : chr [1:17692] NA NA NA NA ...
+##  $ x1955                  : chr [1:17692] NA NA NA NA ...
+##  $ x1956                  : chr [1:17692] NA NA NA NA ...
+##  $ x1957                  : chr [1:17692] NA NA NA NA ...
+##  $ x1958                  : chr [1:17692] NA NA NA NA ...
+##  $ x1959                  : chr [1:17692] NA NA NA NA ...
+##  $ x1960                  : chr [1:17692] NA NA NA NA ...
+##  $ x1961                  : chr [1:17692] NA NA NA NA ...
+##  $ x1962                  : chr [1:17692] NA NA NA NA ...
+##  $ x1963                  : chr [1:17692] NA NA NA NA ...
+##  $ x1964                  : chr [1:17692] NA NA NA NA ...
+##  $ x1965                  : chr [1:17692] NA NA NA NA ...
+##  $ x1966                  : chr [1:17692] NA NA NA NA ...
+##  $ x1967                  : chr [1:17692] NA NA NA NA ...
+##  $ x1968                  : chr [1:17692] NA NA NA NA ...
+##  $ x1969                  : chr [1:17692] NA NA NA NA ...
+##  $ x1970                  : chr [1:17692] NA NA NA NA ...
+##  $ x1971                  : chr [1:17692] NA NA NA NA ...
+##  $ x1972                  : chr [1:17692] NA NA NA NA ...
+##  $ x1973                  : chr [1:17692] NA NA NA NA ...
+##  $ x1974                  : chr [1:17692] NA NA NA NA ...
+##  $ x1975                  : chr [1:17692] NA NA NA NA ...
+##  $ x1976                  : chr [1:17692] NA NA NA NA ...
+##  $ x1977                  : chr [1:17692] NA NA NA NA ...
+##  $ x1978                  : chr [1:17692] NA NA NA NA ...
+##  $ x1979                  : chr [1:17692] NA NA NA NA ...
+##  $ x1980                  : chr [1:17692] NA NA NA NA ...
+##  $ x1981                  : chr [1:17692] NA NA NA NA ...
+##  $ x1982                  : chr [1:17692] NA NA NA NA ...
+##  $ x1983                  : chr [1:17692] NA NA NA NA ...
+##  $ x1984                  : chr [1:17692] NA NA NA NA ...
+##  $ x1985                  : chr [1:17692] NA NA NA NA ...
+##  $ x1986                  : chr [1:17692] NA NA NA NA ...
+##  $ x1987                  : chr [1:17692] NA NA NA NA ...
+##  $ x1988                  : chr [1:17692] NA NA NA NA ...
+##  $ x1989                  : chr [1:17692] NA NA NA NA ...
+##  $ x1990                  : chr [1:17692] NA NA NA NA ...
+##  $ x1991                  : chr [1:17692] NA NA NA NA ...
+##  $ x1992                  : chr [1:17692] NA NA NA NA ...
+##  $ x1993                  : chr [1:17692] NA NA NA NA ...
+##  $ x1994                  : chr [1:17692] NA NA NA NA ...
+##  $ x1995                  : chr [1:17692] "0 0" "1" NA "0 0" ...
+##  $ x1996                  : chr [1:17692] "53" "2" NA "3" ...
+##  $ x1997                  : chr [1:17692] "20" "0 0" NA "0 0" ...
+##  $ x1998                  : chr [1:17692] "31" "12" NA NA ...
+##  $ x1999                  : chr [1:17692] "30" "30" NA NA ...
+##  $ x2000                  : chr [1:17692] "30" "25" "2" NA ...
+##  $ x2001                  : chr [1:17692] "16" "30" NA NA ...
+##  $ x2002                  : chr [1:17692] "79" "24" NA "34" ...
+##  $ x2003                  : chr [1:17692] "1" "4" NA "22" ...
+##  $ x2004                  : chr [1:17692] "4" "2" "2" "15" ...
+##  $ x2005                  : chr [1:17692] "68" "23" "4" "12" ...
+##  $ x2006                  : chr [1:17692] "55" "30" "7" "18" ...
+##  $ x2007                  : chr [1:17692] "12" "19" NA NA ...
+##  $ x2008                  : chr [1:17692] "23" "27" NA NA ...
+##  $ x2009                  : chr [1:17692] "14" "21" NA NA ...
+##  $ x2010                  : chr [1:17692] "78" "23" "7" NA ...
+##  $ x2011                  : chr [1:17692] "12" "12" NA NA ...
+##  $ x2012                  : chr [1:17692] "5" "5" NA NA ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   `Common name` = col_character(),
+##   ..   `ISSCAAP group#` = col_double(),
+##   ..   `ISSCAAP taxonomic group` = col_character(),
+##   ..   `ASFIS species#` = col_character(),
+##   ..   `ASFIS species name` = col_character(),
+##   ..   `FAO major fishing area` = col_double(),
+##   ..   Measure = col_character(),
+##   ..   `1950` = col_character(),
+##   ..   `1951` = col_character(),
+##   ..   `1952` = col_character(),
+##   ..   `1953` = col_character(),
+##   ..   `1954` = col_character(),
+##   ..   `1955` = col_character(),
+##   ..   `1956` = col_character(),
+##   ..   `1957` = col_character(),
+##   ..   `1958` = col_character(),
+##   ..   `1959` = col_character(),
+##   ..   `1960` = col_character(),
+##   ..   `1961` = col_character(),
+##   ..   `1962` = col_character(),
+##   ..   `1963` = col_character(),
+##   ..   `1964` = col_character(),
+##   ..   `1965` = col_character(),
+##   ..   `1966` = col_character(),
+##   ..   `1967` = col_character(),
+##   ..   `1968` = col_character(),
+##   ..   `1969` = col_character(),
+##   ..   `1970` = col_character(),
+##   ..   `1971` = col_character(),
+##   ..   `1972` = col_character(),
+##   ..   `1973` = col_character(),
+##   ..   `1974` = col_character(),
+##   ..   `1975` = col_character(),
+##   ..   `1976` = col_character(),
+##   ..   `1977` = col_character(),
+##   ..   `1978` = col_character(),
+##   ..   `1979` = col_character(),
+##   ..   `1980` = col_character(),
+##   ..   `1981` = col_character(),
+##   ..   `1982` = col_character(),
+##   ..   `1983` = col_character(),
+##   ..   `1984` = col_character(),
+##   ..   `1985` = col_character(),
+##   ..   `1986` = col_character(),
+##   ..   `1987` = col_character(),
+##   ..   `1988` = col_character(),
+##   ..   `1989` = col_character(),
+##   ..   `1990` = col_character(),
+##   ..   `1991` = col_character(),
+##   ..   `1992` = col_character(),
+##   ..   `1993` = col_character(),
+##   ..   `1994` = col_character(),
+##   ..   `1995` = col_character(),
+##   ..   `1996` = col_character(),
+##   ..   `1997` = col_character(),
+##   ..   `1998` = col_character(),
+##   ..   `1999` = col_character(),
+##   ..   `2000` = col_character(),
+##   ..   `2001` = col_character(),
+##   ..   `2002` = col_character(),
+##   ..   `2003` = col_character(),
+##   ..   `2004` = col_character(),
+##   ..   `2005` = col_character(),
+##   ..   `2006` = col_character(),
+##   ..   `2007` = col_character(),
+##   ..   `2008` = col_character(),
+##   ..   `2009` = col_character(),
+##   ..   `2010` = col_character(),
+##   ..   `2011` = col_character(),
+##   ..   `2012` = col_character()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
+```
 
 We need to deal with the years because they are being treated as characters and start with an X. We also have the problem that the column names that are years actually represent data. We haven't discussed tidy data yet, so here is some help. You should run this ugly chunk to transform the data for the rest of the homework. It will only work if you have used janitor to rename the variables in question 2!
 
 ```r
-#fisheries_tidy <- fisheries %>% 
-#  pivot_longer(-c(country,common_name,isscaap_group_number,isscaap_taxonomic_group,as#fis_species_number,asfis_species_name,fao_major_fishing_area,measure),
-#               names_to = "year",
-#               values_to = "catch",
-#               values_drop_na = TRUE) %>% 
-#  mutate(year= as.numeric(str_replace(year, 'x', ''))) %>% 
-#  mutate(catch= str_replace(catch, c(' F'), replacement = '')) %>% 
-#  mutate(catch= str_replace(catch, c('...'), replacement = '')) %>% 
-#  mutate(catch= str_replace(catch, c('-'), replacement = '')) %>% 
-#  mutate(catch= str_replace(catch, c('0 0'), replacement = ''))
-#
-#fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
+fisheries_tidy <- fisheries %>% 
+  pivot_longer(-c(country,common_name,isscaap_group_number,isscaap_taxonomic_group,asfis_species_number,asfis_species_name,fao_major_fishing_area,measure),
+               names_to = "year",
+               values_to = "catch",
+               values_drop_na = TRUE) %>% 
+  mutate(year= as.numeric(str_replace(year, 'x', ''))) %>% 
+  mutate(catch= str_replace(catch, c(' F'), replacement = '')) %>% 
+  mutate(catch= str_replace(catch, c('...'), replacement = '')) %>% 
+  mutate(catch= str_replace(catch, c('-'), replacement = '')) %>% 
+  mutate(catch= str_replace(catch, c('0 0'), replacement = ''))
+
+fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
 ```
 
 3. How many countries are represented in the data? Provide a count and list their names.
+*There are a total of 203 countries, represented by the 203 row entries in the fisheries_tidy data frame when sorting by count().*
 
+```r
+fisheries_tidy %>%
+  count(country, sort = T)
+```
+
+```
+## # A tibble: 203 × 2
+##    country                      n
+##    <fct>                    <int>
+##  1 United States of America 18080
+##  2 Spain                    17482
+##  3 Japan                    15429
+##  4 Portugal                 11570
+##  5 Korea, Republic of       10824
+##  6 France                   10639
+##  7 Taiwan Province of China  9927
+##  8 Indonesia                 9274
+##  9 Australia                 8183
+## 10 Un. Sov. Soc. Rep.        7084
+## # … with 193 more rows
+```
 
 4. Refocus the data only to include country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch.
 
+```r
+fisheries_tidy %>%
+  select(country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch)
+```
+
+```
+## # A tibble: 376,771 × 6
+##    country isscaap_taxonomic_group asfis_species_n… asfis_species_n…  year catch
+##    <fct>   <chr>                   <chr>            <fct>            <dbl> <dbl>
+##  1 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1995    NA
+##  2 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1996    53
+##  3 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1997    20
+##  4 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1998    31
+##  5 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        1999    30
+##  6 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2000    30
+##  7 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2001    16
+##  8 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2002    79
+##  9 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2003     1
+## 10 Albania Sharks, rays, chimaeras Squatinidae      10903XXXXX        2004     4
+## # … with 376,761 more rows
+```
 
 5. Based on the asfis_species_number, how many distinct fish species were caught as part of these data?
+*By piping the fisheries_tidy data frame into a summarise() command, we see that there are 1551 distinct fish species caught in this data.*
 
+```r
+fisheries_tidy %>%
+  summarise(total_distinct = n_distinct(asfis_species_number))
+```
+
+```
+## # A tibble: 1 × 1
+##   total_distinct
+##            <int>
+## 1           1551
+```
 
 6. Which country had the largest overall catch in the year 2000?
+*From running an arrange() command in descending order for 'catch' in the year 2000, we see that China had the largest overall catch of Marine fishes nei, with 9068 in the year 2000 alone.*
 
+```r
+fisheries_tidy %>%
+  select(year,catch,country,common_name) %>%
+  filter(year==2000) %>%
+  arrange(desc(catch))
+```
+
+```
+## # A tibble: 8,793 × 4
+##     year catch country                  common_name                   
+##    <dbl> <dbl> <fct>                    <chr>                         
+##  1  2000  9068 China                    Marine fishes nei             
+##  2  2000  5717 Peru                     Anchoveta(=Peruvian anchovy)  
+##  3  2000  5065 Russian Federation       Alaska pollock(=Walleye poll.)
+##  4  2000  4945 Viet Nam                 Marine fishes nei             
+##  5  2000  4299 Chile                    Chilean jack mackerel         
+##  6  2000  3288 China                    Marine molluscs nei           
+##  7  2000  2782 China                    Largehead hairtail            
+##  8  2000  2438 United States of America Alaska pollock(=Walleye poll.)
+##  9  2000  1234 China                    Marine crustaceans nei        
+## 10  2000   999 Philippines              Scads nei                     
+## # … with 8,783 more rows
+```
 
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
+*Morocco caught the most sardines between 1990 and 2000 with 7470 total sardines caught.*
 
+```r
+fisheries_tidy %>%
+  filter(asfis_species_name == "Sardina pilchardus") %>%
+  filter(between(year,1990,2000))%>%
+  group_by(country) %>%
+  summarize(sardine_sum = sum(catch, na.rm=TRUE)) %>%
+  slice_max(sardine_sum, n=10)
+```
+
+```
+## # A tibble: 10 × 2
+##    country               sardine_sum
+##    <fct>                       <dbl>
+##  1 Morocco                      7470
+##  2 Spain                        3507
+##  3 Russian Federation           1639
+##  4 Ukraine                      1030
+##  5 France                        966
+##  6 Portugal                      818
+##  7 Greece                        528
+##  8 Italy                         507
+##  9 Serbia and Montenegro         478
+## 10 Denmark                       477
+```
 
 8. Which five countries caught the most cephalopods between 2008-2012?
+*China, the Republic of Korea, Peru, Japan, and Chile caught the most cephalopods between 2008-2012.*
 
 
+```r
+fisheries_tidy %>%
+  filter(str_detect(isscaap_taxonomic_group, "Squids")) %>%
+  filter(between(year,2008,2012)) %>%
+  group_by(country) %>%
+  summarize(cephalopod_sum_by_group = sum(catch, na.rm=TRUE)) %>%
+  slice_max(cephalopod_sum_by_group, n=10)
+```
 
+```
+## # A tibble: 10 × 2
+##    country                  cephalopod_sum_by_group
+##    <fct>                                      <dbl>
+##  1 China                                       8349
+##  2 Korea, Republic of                          3480
+##  3 Peru                                        3422
+##  4 Japan                                       3248
+##  5 Chile                                       2775
+##  6 United States of America                    2417
+##  7 Indonesia                                   1622
+##  8 Taiwan Province of China                    1394
+##  9 Spain                                       1147
+## 10 France                                      1138
+```
 
 9. Which species had the highest catch total between 2008-2012? (hint: Osteichthyes is not a species)
+*The Theragra chalcogramma, commonly known as the Alaskan pollock, had the highest catch total in 2008-2012 with 41075 total caught.*
 
+```r
+fisheries_tidy %>%
+  filter(!asfis_species_name == "Osteichthyes") %>%
+  filter(between(year,2008,2012)) %>%
+  group_by(asfis_species_name) %>%
+  summarize(total_species_catch = sum(catch, na.rm=TRUE)) %>%
+  slice_max(total_species_catch, n=20)
+```
+
+```
+## # A tibble: 20 × 2
+##    asfis_species_name     total_species_catch
+##    <chr>                                <dbl>
+##  1 Theragra chalcogramma                41075
+##  2 Engraulis ringens                    35523
+##  3 Katsuwonus pelamis                   32153
+##  4 Trichiurus lepturus                  30400
+##  5 Clupea harengus                      28527
+##  6 Thunnus albacares                    20119
+##  7 Scomber japonicus                    14723
+##  8 Gadus morhua                         13253
+##  9 Thunnus alalunga                     12019
+## 10 Natantia                             11984
+## 11 Thunnus obesus                       11692
+## 12 Decapterus spp                       11244
+## 13 Scomber scombrus                     11054
+## 14 Xiphias gladius                      10333
+## 15 Elasmobranchii                        9764
+## 16 Sciaenidae                            9462
+## 17 Makaira nigricans                     9379
+## 18 Engraulis japonicus                   8376
+## 19 Sepiidae, Sepiolidae                  7646
+## 20 Engraulis encrasicolus                7335
+```
 
 10. Use the data to do at least one analysis of your choice.
+*With the data, I chose to look at the most caught species of shark, ray, or chimaeras (class of Chondrichthyes) between the years 1972 and 2002. The Elasmobranchii, Rajiformes, Raja spp, and Squalus acanthias are not specific species, and the highest actual species is the Isuru oxyrinchus, or more commonly known as shortfin mako shark, with 4444.*
+
+
+```r
+fisheries_tidy %>%
+  filter(str_detect(isscaap_taxonomic_group, "Shark")) %>%
+  filter(between(year,1972,2002)) %>%
+  group_by(asfis_species_name) %>%
+  summarize(total_shark_catch = sum(catch, na.rm = TRUE)) %>%
+  slice_max(total_shark_catch, n=10)
+```
+
+```
+## # A tibble: 10 × 2
+##    asfis_species_name total_shark_catch
+##    <chr>                          <dbl>
+##  1 Elasmobranchii                 48447
+##  2 Rajiformes                     27945
+##  3 Raja spp                        8952
+##  4 Squalus acanthias               7522
+##  5 Isurus oxyrinchus               4444
+##  6 Mustelus spp                    4257
+##  7 Lamna nasus                     4152
+##  8 Squalidae                       4109
+##  9 Carcharhinidae                  3016
+## 10 Prionace glauca                 2822
+```
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

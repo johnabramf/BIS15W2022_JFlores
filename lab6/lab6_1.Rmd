@@ -94,7 +94,13 @@ msleep %>%
   filter(!is.na(vore)) %>%
   tabyl(order, vore)
 ```
-
+*You could also use the method below*
+```{r}
+msleep%>%
+  group_by(order)%>%
+  summarize(n_vores=n_distinct(vore))%>%
+  filter(n_vores>1)
+```
 
 ## `summarize()`
 `summarize()` will produce summary statistics for a given variable in a data frame. For example, if you are asked to calculate the mean of `sleep_total` for large and small mammals you could do this using a combination of commands, but it isn't very efficient or clean. We can do better!  

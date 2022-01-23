@@ -23,16 +23,23 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 library("tidyverse")
 library("janitor")
 library("skimr")
+library("remotes")
 library("palmerpenguins")
 ```
 
 ## Review
 The summarize() and group_by() functions are powerful tools that we can use to produce clean summaries of data. Especially when used together, we can quickly group variables of interest and save time. Let's do some practice with the [palmerpenguins(https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data to refresh our memory.
 ```{r}
-glimpse(penguins)
+skim(penguins)
 ```
 
 As biologists, a good question that we may ask is how do the measured variables differ by island (on average)?
+
+```{r}
+levels(penguins$island)
+```
+
+
 ```{r}
 penguins %>% 
   group_by(island) %>% 
@@ -105,19 +112,45 @@ penguins %>%
 
 ## Practice
 1. Produce a summary of the mean for bill_length_mm, bill_depth_mm, flipper_length_mm, and body_mass_g within Adelie penguins only. Be sure to provide the number of samples.
-```{r}
 
+```{r}
+names(penguins)
 ```
+
+```{r}
+penguins %>%
+  filter(species == "Adelie") %>%
+  select(bill_length_mm,bill_depth_mm,flipper_length_mm,body_mass_g) %>%
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm=TRUE),
+            mean_bill_depth = mean(bill_depth_mm, na.rm=TRUE),
+            mean_flipper_length_mm = mean(flipper_length_mm, na.rm=TRUE),
+            mean_body_mass = mean(body_mass_g, na.rm=TRUE),
+            number_of_samples = n())
+```
+
+```{r}
+penguins %>%count(species) #double check 152 from code chunk above corroborates
+```
+
 
 2. How does the mean of `bill_length_mm` compare between penguin species?
 ```{r}
-
+penguins %>%
+  group_by(species) %>%
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm=T))
 ```
 
 3. For some penguins, their sex is listed as NA. Where do these penguins occur?
 ```{r}
-
+penguins %>%
+  group_by(island,species) %>%
+  summarize(number_NAs=sum(is.na(sex)))
 ```
+
+```{r}
+penguins %>% select(sex,island,species)
+```
+
 
 ## `across()`
 Last time we had some great questions on how to use `filter()` and `select()` across multiple variables. There is a new function in dplyr called `across()` which is designed to work across multiple variables. Have a look at Rebecca Barter's awesome blog [here](http://www.rebeccabarter.com/blog/2020-07-09-across/) as I am following her below.  
@@ -176,7 +209,8 @@ penguins %>%
 1. Produce separate summaries of the mean and standard deviation for bill_length_mm, bill_depth_mm, and flipper_length_mm for each penguin species. Be sure to provide the number of samples.  
 mean
 ```{r}
-
+penguins %>%
+  summarise(across(contains("mm"), mean, na.rm=T)) 
 ```
 
 ## Wrap-up  

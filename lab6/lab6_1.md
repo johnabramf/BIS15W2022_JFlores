@@ -193,7 +193,29 @@ msleep %>%
 ##       Scandentia     0     0       0    1
 ##     Soricomorpha     0     0       1    3
 ```
+*You could also use the method below*
 
+```r
+msleep%>%
+  group_by(order)%>%
+  summarize(n_vores=n_distinct(vore))%>%
+  filter(n_vores>1)
+```
+
+```
+## # A tibble: 9 × 2
+##   order           n_vores
+##   <chr>             <int>
+## 1 Artiodactyla          2
+## 2 Cingulata             2
+## 3 Didelphimorphia       2
+## 4 Diprotodontia         2
+## 5 Erinaceomorpha        2
+## 6 Hyracoidea            2
+## 7 Primates              3
+## 8 Rodentia              4
+## 9 Soricomorpha          3
+```
 
 ## `summarize()`
 `summarize()` will produce summary statistics for a given variable in a data frame. For example, if you are asked to calculate the mean of `sleep_total` for large and small mammals you could do this using a combination of commands, but it isn't very efficient or clean. We can do better!  
