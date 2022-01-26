@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Please Add Your Name Here" />
+<meta name="author" content="John Abram Flores" />
 
-<meta name="date" content="2022-01-24" />
+<meta name="date" content="2022-01-26" />
 
 <title>Midterm 1</title>
 
@@ -166,8 +166,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Midterm 1</h1>
-<h4 class="author">Please Add Your Name Here</h4>
-<h4 class="date">2022-01-24</h4>
+<h4 class="author">John Abram Flores</h4>
+<h4 class="date">2022-01-26</h4>
 
 </div>
 
@@ -181,40 +181,206 @@ pre code {
 <div id="load-the-tidyverse" class="section level2">
 <h2>Load the tidyverse</h2>
 <p>If you plan to use any other libraries to complete this assignment then you should load them here.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.1.1     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<pre class="r"><code>library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.6     v dplyr   1.0.7
+## v tidyr   1.1.4     v stringr 1.4.0
+## v readr   2.1.1     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(&quot;dplyr&quot;)
+library(&quot;janitor&quot;)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(&quot;remotes&quot;)</code></pre>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
 <p>Wikipedia’s definition of <a href="https://en.wikipedia.org/wiki/Data_science">data science</a>: “Data science is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from noisy, structured and unstructured data, and apply knowledge and actionable insights from data across a broad range of application domains.”</p>
 <ol style="list-style-type: decimal">
-<li><p>(2 points) Consider the definition of data science above. Although we are only part-way through the quarter, what specific elements of data science do you feel we have practiced? Provide at least one specific example.</p></li>
-<li><p>(2 points) What is the most helpful or interesting thing you have learned so far in BIS 15L? What is something that you think needs more work or practice?</p></li>
+<li>(2 points) Consider the definition of data science above. Although we are only part-way through the quarter, what specific elements of data science do you feel we have practiced? Provide at least one specific example.</li>
 </ol>
+<p><strong>Throughout the first 3 weeks of BIS015L, some specific elements of data science that we’ve practiced are the idea of extract knowledge and insights from noisy, unstructured or structured data, as well as touched a little into the actionable insights (e.g. data analysis in a time span) from data. One specific example that encapsulates applying knowledge and actionable insights would be with Lab 6’s homework, as we were asked to do some simple clean up of the UN’s Food and Agriculture Organization’s fishery data. In Lab 6, we sorted the data to find countries with the most overall catch of a species or in total, within in a set timespan (e.g. 2008-2012).</strong></p>
+<ol start="2" style="list-style-type: decimal">
+<li>(2 points) What is the most helpful or interesting thing you have learned so far in BIS 15L? What is something that you think needs more work or practice?</li>
+</ol>
+<p><strong>The most interesting thing I’ve learned so far in BIS 015L would be the different libraries we’ve used so far to arrange, sort, and mutate data, such as janitor, tidyverse, and dplyr. One thing I may need more practice on is the pipe (%&gt;%) function, as I take the most time to code with these functions.</strong></p>
 <p>In the midterm 1 folder there is a second folder called <code>data</code>. Inside the <code>data</code> folder, there is a .csv file called <code>ElephantsMF</code>. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), “Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana),” Biology Letters, 9: 20130011. <a href="https://www.kaggle.com/mostafaelseidy/elephantsmf">kaggle</a>.</p>
 <ol start="3" style="list-style-type: decimal">
-<li><p>(2 points) Please load these data as a new object called <code>elephants</code>. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.</p></li>
-<li><p>(2 points) Change the names of the variables to lower case and change the class of the variable <code>sex</code> to a factor.</p></li>
-<li><p>(2 points) How many male and female elephants are represented in the data?</p></li>
-<li><p>(2 points) What is the average age all elephants in the data?</p></li>
-<li><p>(2 points) How does the average age and height of elephants compare by sex?</p></li>
-<li><p>(2 points) How does the average height of elephants compare by sex for individuals over 20 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.</p></li>
+<li>(2 points) Please load these data as a new object called <code>elephants</code>. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.</li>
 </ol>
+<pre class="r"><code>elephants &lt;- readr::read_csv(&quot;data/ElephantsMF.csv&quot;)</code></pre>
+<pre><code>## Rows: 288 Columns: 3</code></pre>
+<pre><code>## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (1): Sex
+## dbl (2): Age, Height</code></pre>
+<pre><code>## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p><strong>The glimpse function shows us 288 rows (entries), and 3 columns, which are age, height, and sex. The classes are shown with the function as well, as age and height are dbl and sex is character.</strong></p>
+<pre class="r"><code>glimpse(elephants)</code></pre>
+<pre><code>## Rows: 288
+## Columns: 3
+## $ Age    &lt;dbl&gt; 1.40, 17.50, 12.75, 11.17, 12.67, 12.67, 12.25, 12.17, 28.17, 1~
+## $ Height &lt;dbl&gt; 120.00, 227.00, 235.00, 210.00, 220.00, 189.00, 225.00, 204.00,~
+## $ Sex    &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;~</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>(2 points) Change the names of the variables to lower case and change the class of the variable <code>sex</code> to a factor.</li>
+</ol>
+<pre class="r"><code>elephants_c &lt;- clean_names(elephants)</code></pre>
+<pre class="r"><code>elephants_c$sex &lt;- as.factor(elephants_c$sex)
+glimpse(elephants_c)</code></pre>
+<pre><code>## Rows: 288
+## Columns: 3
+## $ age    &lt;dbl&gt; 1.40, 17.50, 12.75, 11.17, 12.67, 12.67, 12.25, 12.17, 28.17, 1~
+## $ height &lt;dbl&gt; 120.00, 227.00, 235.00, 210.00, 220.00, 189.00, 225.00, 204.00,~
+## $ sex    &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, ~</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>(2 points) How many male and female elephants are represented in the data?</li>
+</ol>
+<p><strong>By piping into a count(df$var) command, we see that there are 150 female elephants and 138 male elephants represented in the data.</strong></p>
+<pre class="r"><code>elephants_c %&gt;%
+  group_by(sex) %&gt;% #Group counting data by sex
+  count(sex) #Count the entries of data by sex</code></pre>
+<pre><code>## # A tibble: 2 x 2
+## # Groups:   sex [2]
+##   sex       n
+##   &lt;fct&gt; &lt;int&gt;
+## 1 F       150
+## 2 M       138</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>(2 points) What is the average age all elephants in the data? <strong>Of all the elephants, the average age is around 10.87132 years.</strong></li>
+</ol>
+<pre class="r"><code>elephants_c %&gt;%
+  summarize(average_age = mean(age))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   average_age
+##         &lt;dbl&gt;
+## 1        11.0</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>(2 points) How does the average age and height of elephants compare by sex? <strong>By sex, the average age of a female elephant is 12.8354 years old, and the average age of a male elephant is 8.945145 years By height, the average (shoulder) height of a female elephant is 190.0307 cm, while the average height of a male elephant is 185.1312 cm.</strong></li>
+</ol>
+<pre class="r"><code>elephants_c %&gt;%
+  group_by(sex) %&gt;% #Group by sex
+  summarize(average_age_by_sex = mean(age), average_height_by_sex=mean(height)) #Calculate the average age and height by sex</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   sex   average_age_by_sex average_height_by_sex
+##   &lt;fct&gt;              &lt;dbl&gt;                 &lt;dbl&gt;
+## 1 F                  12.8                   190.
+## 2 M                   8.95                  185.</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>(2 points) How does the average height of elephants compare by sex for individuals over 20 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.<br />
+<strong>The average height of a male over 20 years old is 269.5931 cm, while the average height of a female over 20 years old is 232.2014 cm. On average, males over 20 years old are taller than females over 20 years old, compared to all females and males, where females were taller on average. There are a total of 37 females and 13 males over 20 years old. The minimum heights are 192.54 cm for females and 228.69 cm for males, and the maximum heights are 277.80 cm for females and 304.06 cm for males.</strong></li>
+</ol>
+<pre class="r"><code>elephants_c %&gt;%
+  filter(age&gt;20) %&gt;% #Filter entries to elepahnts over 20 years old
+  group_by(sex) %&gt;% #Group by sex
+  summarize(average_height_over_20=mean(height), min_height=min(height), max_height=max(height), individuals=n())</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   sex   average_height_over_20 min_height max_height individuals
+##   &lt;fct&gt;                  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;
+## 1 F                       232.       193.       278.          37
+## 2 M                       270.       229.       304.          13</code></pre>
 <p>For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in <a href="https://en.wikipedia.org/wiki/Gabon">Gabon, Africa</a>. One thing to notice is that the data include 24 separate transects. Each transect represents a path through different forest management areas.</p>
 <p>Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate community composition and diversity declines along a defaunation gradient radiating from rural villages in Gabon. <em>Journal of Applied Ecology</em>. 2016. This paper, along with a description of the variables is included inside the midterm 1 folder.</p>
 <ol start="9" style="list-style-type: decimal">
-<li><p>(2 points) Load <code>IvindoData_DryadVersion.csv</code> and use the function(s) of your choice to get an idea of the overall structure. Change the variables <code>HuntCat</code> and <code>LandUse</code> to factors.</p></li>
-<li><p>(4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare?</p></li>
-<li><p>(4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let’s try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 3km from a village to sites that are greater than 25km from a village? The variable <code>Distance</code> measures the distance of the transect from the nearest village. Hint: try using the <code>across</code> operator.</p></li>
-<li><p>(4 points) Based on your interest, do one exploratory analysis on the <code>gabon</code> data of your choice. This analysis needs to include a minimum of two functions in <code>dplyr.</code></p></li>
+<li>(2 points) Load <code>IvindoData_DryadVersion.csv</code> and use the function(s) of your choice to get an idea of the overall structure. Change the variables <code>HuntCat</code> and <code>LandUse</code> to factors.</li>
 </ol>
+<pre class="r"><code>gabon_defaunation &lt;- readr::read_csv(&quot;data/IvindoData_DryadVersion.csv&quot;)</code></pre>
+<pre><code>## Rows: 24 Columns: 26</code></pre>
+<pre><code>## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## chr  (2): HuntCat, LandUse
+## dbl (24): TransectID, Distance, NumHouseholds, Veg_Rich, Veg_Stems, Veg_lian...</code></pre>
+<pre><code>## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>glimpse(gabon_defaunation)</code></pre>
+<pre><code>## Rows: 24
+## Columns: 26
+## $ TransectID              &lt;dbl&gt; 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, ~
+## $ Distance                &lt;dbl&gt; 7.14, 17.31, 18.32, 20.85, 15.95, 17.47, 24.06~
+## $ HuntCat                 &lt;chr&gt; &quot;Moderate&quot;, &quot;None&quot;, &quot;None&quot;, &quot;None&quot;, &quot;None&quot;, &quot;N~
+## $ NumHouseholds           &lt;dbl&gt; 54, 54, 29, 29, 29, 29, 29, 54, 25, 73, 46, 56~
+## $ LandUse                 &lt;chr&gt; &quot;Park&quot;, &quot;Park&quot;, &quot;Park&quot;, &quot;Logging&quot;, &quot;Park&quot;, &quot;Pa~
+## $ Veg_Rich                &lt;dbl&gt; 16.67, 15.75, 16.88, 12.44, 17.13, 16.50, 14.7~
+## $ Veg_Stems               &lt;dbl&gt; 31.20, 37.44, 32.33, 29.39, 36.00, 29.22, 31.2~
+## $ Veg_liana               &lt;dbl&gt; 5.78, 13.25, 4.75, 9.78, 13.25, 12.88, 8.38, 8~
+## $ Veg_DBH                 &lt;dbl&gt; 49.57, 34.59, 42.82, 36.62, 41.52, 44.07, 51.2~
+## $ Veg_Canopy              &lt;dbl&gt; 3.78, 3.75, 3.43, 3.75, 3.88, 2.50, 4.00, 4.00~
+## $ Veg_Understory          &lt;dbl&gt; 2.89, 3.88, 3.00, 2.75, 3.25, 3.00, 2.38, 2.71~
+## $ RA_Apes                 &lt;dbl&gt; 1.87, 0.00, 4.49, 12.93, 0.00, 2.48, 3.78, 6.1~
+## $ RA_Birds                &lt;dbl&gt; 52.66, 52.17, 37.44, 59.29, 52.62, 38.64, 42.6~
+## $ RA_Elephant             &lt;dbl&gt; 0.00, 0.86, 1.33, 0.56, 1.00, 0.00, 1.11, 0.43~
+## $ RA_Monkeys              &lt;dbl&gt; 38.59, 28.53, 41.82, 19.85, 41.34, 43.29, 46.2~
+## $ RA_Rodent               &lt;dbl&gt; 4.22, 6.04, 1.06, 3.66, 2.52, 1.83, 3.10, 1.26~
+## $ RA_Ungulate             &lt;dbl&gt; 2.66, 12.41, 13.86, 3.71, 2.53, 13.75, 3.10, 8~
+## $ Rich_AllSpecies         &lt;dbl&gt; 22, 20, 22, 19, 20, 22, 23, 19, 19, 19, 21, 22~
+## $ Evenness_AllSpecies     &lt;dbl&gt; 0.793, 0.773, 0.740, 0.681, 0.811, 0.786, 0.81~
+## $ Diversity_AllSpecies    &lt;dbl&gt; 2.452, 2.314, 2.288, 2.006, 2.431, 2.429, 2.56~
+## $ Rich_BirdSpecies        &lt;dbl&gt; 11, 10, 11, 8, 8, 10, 11, 11, 11, 9, 11, 11, 1~
+## $ Evenness_BirdSpecies    &lt;dbl&gt; 0.732, 0.704, 0.688, 0.559, 0.799, 0.771, 0.80~
+## $ Diversity_BirdSpecies   &lt;dbl&gt; 1.756, 1.620, 1.649, 1.162, 1.660, 1.775, 1.92~
+## $ Rich_MammalSpecies      &lt;dbl&gt; 11, 10, 11, 11, 12, 12, 12, 8, 8, 10, 10, 11, ~
+## $ Evenness_MammalSpecies  &lt;dbl&gt; 0.736, 0.705, 0.650, 0.619, 0.736, 0.694, 0.77~
+## $ Diversity_MammalSpecies &lt;dbl&gt; 1.764, 1.624, 1.558, 1.484, 1.829, 1.725, 1.92~</code></pre>
+<pre class="r"><code>gabon_defaunation$HuntCat &lt;- as.factor(gabon_defaunation$HuntCat) #Set HuntCat and LandUse as factors
+gabon_defaunation$LandUse &lt;- as.factor(gabon_defaunation$LandUse)</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>(4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare? <strong>For transects that have moderate or high hunting intensities, both average bird and mammal diversity is higher in higher intensity transects than lower intensity transects. For bird diversity, high areas have an average diversity of 1.6609, compared to the moderate areas of 1.6215. For mammal species, high areas have an average density of 1.737, while the moderate areas have an average density 1.68375.</strong></li>
+</ol>
+<pre class="r"><code>gabon_defaunation %&gt;%
+  filter(HuntCat==&quot;Moderate&quot; | HuntCat==&quot;High&quot;) %&gt;% #Filter by moderate OR high hunting intensity
+  group_by(HuntCat) %&gt;% #Group by intensity
+  summarize(avg_bird_diversity=mean(Diversity_BirdSpecies), avg_mammal_diversity=mean(Diversity_MammalSpecies))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   HuntCat  avg_bird_diversity avg_mammal_diversity
+##   &lt;fct&gt;                 &lt;dbl&gt;                &lt;dbl&gt;
+## 1 High                   1.66                 1.74
+## 2 Moderate               1.62                 1.68</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>(4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let’s try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 3km from a village to sites that are greater than 25km from a village? The variable <code>Distance</code> measures the distance of the transect from the nearest village. Hint: try using the <code>across</code> operator.</li>
+</ol>
+<p><strong>After running the two code chunks below, we see that there are two transects less than 3km away from a village, and transect more than 25km away from a village. On average, the transects less than 3km from a village have a higher abundance of birds, elephants, and rodents compared to the transects greater than 25km, while the transects greater than 25km from a village have higher abundance of apes, monkeys, and ungulates.</strong></p>
+<pre class="r"><code>gabon_defaunation %&gt;%
+  filter(Distance&lt;3) %&gt;% #Filter out transects for less than 3km
+  summarize(number_of_transects_3km=n_distinct(TransectID), across(contains(&quot;RA&quot;), mean, na.rm=TRUE)) %&gt;% #Calculate averages of all RA&#39;s for selected transects
+  select(!TransectID) #Remove TransectID Variable</code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   number_of_trans~ RA_Apes RA_Birds RA_Elephant RA_Monkeys RA_Rodent RA_Ungulate
+##              &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1                2    0.12     76.6       0.145       17.3      3.90        1.87</code></pre>
+<pre class="r"><code>gabon_defaunation %&gt;%
+  filter(Distance&gt;25) %&gt;% #Filter out transects for greather than 25km
+  summarize(number_of_transects_25km=n_distinct(TransectID), across(contains(&quot;RA&quot;), mean, na.rm=TRUE)) %&gt;%
+  select(!TransectID) </code></pre>
+<pre><code>## # A tibble: 1 x 7
+##   number_of_trans~ RA_Apes RA_Birds RA_Elephant RA_Monkeys RA_Rodent RA_Ungulate
+##              &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1                1    4.91     31.6           0       54.1      1.29        8.12</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>(4 points) Based on your interest, do one exploratory analysis on the <code>gabon</code> data of your choice. This analysis needs to include a minimum of two functions in <code>dplyr.</code></li>
+</ol>
+<p><strong>In this data, I will compare overall richness, evenness, and diversity of animals by land uses.</strong></p>
+<pre class="r"><code>gabon_defaunation$LandUse &lt;- as.factor(gabon_defaunation$LandUse)
+is.factor(gabon_defaunation$LandUse) #Double checked that the first line worked (without using glimpse, str, etc.)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p><strong>With the modified data frame below, we see 13 transects under logging, 6 for parkuse, and 4 with no designation. For species richness, park use had greater richness than logging, which had greater richness than no use. In species evenness, no use land has the greatest evenness, followed by park use then logging use at last. For overall species diversity, park use had the highest diversity, followed by no use then logging use.</strong></p>
+<pre class="r"><code>gabon_defaunation %&gt;%
+  group_by(LandUse) %&gt;% #Group by land use
+  summarize(across(contains(&quot;All&quot;), mean, na.rm=TRUE), n_transects=n_distinct(TransectID))</code></pre>
+<pre><code>## # A tibble: 3 x 5
+##   LandUse Rich_AllSpecies Evenness_AllSpecies Diversity_AllSpecies n_transects
+##   &lt;fct&gt;             &lt;dbl&gt;               &lt;dbl&gt;                &lt;dbl&gt;       &lt;int&gt;
+## 1 Logging            19.6               0.753                 2.23          13
+## 2 Neither            19.2               0.797                 2.36           4
+## 3 Park               21.9               0.787                 2.43           6</code></pre>
 </div>
 
 
