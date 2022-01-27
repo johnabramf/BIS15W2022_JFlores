@@ -1,7 +1,7 @@
 ---
 title: "Midterm 1"
 author: "John Abram Flores"
-date: "2022-01-26"
+date: "2022-01-27"
 output:
   html_document: 
     theme: spacelab
@@ -154,6 +154,7 @@ elephants_c %>%
 ```
 
 6. (2 points) What is the average age all elephants in the data?
+
 **Of all the elephants, the average age is around 10.87132 years.**
 
 
@@ -171,6 +172,7 @@ elephants_c %>%
 
 
 7. (2 points) How does the average age and height of elephants compare by sex?
+
 **By sex, the average age of a female elephant is 12.8354 years old, and the average age of a male elephant is 8.945145 years  By height, the average (shoulder) height of a female elephant is 190.0307 cm, while the average height of a male elephant is 185.1312 cm.**
 
 ```r
@@ -188,6 +190,7 @@ elephants_c %>%
 ```
 
 8. (2 points) How does the average height of elephants compare by sex for individuals over 20 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.  
+
 **The average height of a male over 20 years old is 269.5931 cm, while the average height of a female over 20 years old is 232.2014 cm. On average, males over 20 years old are taller than females over 20 years old, compared to all females and males, where females were taller on average. There are a total of 37 females and 13 males over 20 years old. The minimum heights are 192.54 cm for females and 228.69 cm for males, and the maximum heights are 277.80 cm for females and 304.06 cm for males.**
 
 ```r
@@ -275,6 +278,7 @@ gabon_defaunation$LandUse <- as.factor(gabon_defaunation$LandUse)
 ```
 
 10. (4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare?
+
 **For transects that have moderate or high hunting intensities, both average bird and mammal diversity is higher in higher intensity transects than lower intensity transects. For bird diversity, high areas have an average diversity of 1.6609, compared to the moderate areas of 1.6215. For mammal species, high areas have an average density of 1.737, while the moderate areas have an average density 1.68375.**
 
 ```r
