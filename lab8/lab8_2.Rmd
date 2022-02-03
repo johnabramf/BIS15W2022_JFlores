@@ -2,10 +2,11 @@
 title: "Tidyr 2: `pivot_wider()`"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -126,6 +127,7 @@ tb_data %>%
 
 ## Practice
 1. Load the `gene_exp.csv` data as a new object `gene_exp`. Are these data tidy? Use `pivot_wider()` to tidy the data.
+**These data aren't tidy as variables for treatment/control are under the type var.**
 ```{r}
 gene_exp <- readr::read_csv("data/gene_exp.csv")
 gene_exp
@@ -156,17 +158,22 @@ For the last practice example, I will use data from the awesome [R Ladies Sydney
 
 1. Load the beachbugs data and have a look.
 ```{r}
-
+beachbugs <- readr::read_csv("data/beachbugs_long.csv")
+beachbugs
 ```
 
 2. Use `pivot_wider` to transform the data into wide format.
 ```{r}
-
+beachbugs_wide <- beachbugs %>%
+  pivot_wider(names_from="site", values_from="buglevels")
+beachbugs_wide
 ```
 
 3. Now, use `pivot_longer` to transform them back to long!
 ```{r}
-
+beachbugs_long <- beachbugs_wide %>%
+  pivot_longer(-year, names_to = "beach", values_to = "buglevels")
+beachbugs_long
 ```
 
 ## Wrap-up  
