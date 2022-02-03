@@ -1,10 +1,11 @@
 ---
 title: "Data Visualization: `ggplot` part 1"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -101,25 +102,38 @@ homerange %>%
 ## Practice
 1. There are more herbivores than carnivores in the homerange data, but how do their masses compare? Make a summary and boxplot that compares their masses. Use `log10.mass`.
 ```{r}
-
+homerange %>%
+  filter(!log10.mass=="NA") %>%
+  group_by(trophic.guild) %>%
+  summarize(log10.mass.average=mean(log10.mass)) 
 ```
 
 ```{r}
-
+homerange %>%
+  ggplot(aes(x=trophic.guild, y=log10.mass)) +geom_boxplot()
 ```
 
 2. Have a closer look at carnivorous mammals. Summarize and visualize the range of log10.mass by family.
 ```{r}
-
+homerange %>%
+  filter(trophic.guild=="carnivore") %>%
+  group_by(family) %>%
+  summarize(carnivore.avg.mass=mean(log10.mass)) %>%
+  arrange(desc(carnivore.avg.mass))
 ```
+
+```{r}
+homerange %>%
+  filter(trophic.guild=="carnivore") %>%
+  ggplot(aes(x=family, y=log10.mass))+geom_boxplot() +coord_flip()
+```
+
 
 3. Now use a boxplot to visualize the range of body mass by family of mammalian carnivore.
 ```{r}
-
-```
-
-```{r}
-
+homerange %>%
+  filter(trophic.guild=="carnivore", class=="mammalia") %>%
+  ggplot(aes(x=family, y=log10.mass)) +geom_boxplot() +coord_flip()
 ```
 
 ## That's it, let's take a break!   
