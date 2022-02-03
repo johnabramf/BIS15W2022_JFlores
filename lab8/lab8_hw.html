@@ -220,7 +220,7 @@ library(janitor)</code></pre>
 ## # ... with 3,680 more rows</code></pre>
 <p>If you want to try <code>here</code>, first notice the output when you load the <code>here</code> library. It gives you information on the current working directory. You can then use it to easily and intuitively load files.</p>
 <pre class="r"><code>library(here)</code></pre>
-<pre><code>## here() starts at C:/Users/likea/Documents/GitHub/BIS15W2022_JFlores</code></pre>
+<pre><code>## here() starts at C:/Users/Default.DESKTOP-KQBUCHH/Desktop/BIS15W2022_JFlores</code></pre>
 <p>The quotes show the folder structure from the root directory.</p>
 <pre class="r"><code>sydneybeaches &lt;-read_csv(here(&quot;lab8&quot;, &quot;data&quot;, &quot;sydneybeaches.csv&quot;)) %&gt;% janitor::clean_names()</code></pre>
 <pre><code>## Rows: 3690 Columns: 8</code></pre>
@@ -234,7 +234,7 @@ library(janitor)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Are these data “tidy” per the definitions of the tidyverse? How do you know? Are they in wide or long format?</li>
 </ol>
-<p><strong>It is not tidy, as by the definiytion from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.</strong></p>
+<p><strong>It is not tidy, as by the definition from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.</strong></p>
 <ol start="3" style="list-style-type: decimal">
 <li>We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object <code>sydneybeaches_long</code></li>
 </ol>
@@ -321,37 +321,44 @@ sydneybeaches_long_mmddyyyy</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>What is the average <code>enterococci_cfu_100ml</code> by year for each beach. Think about which data you will use- long or wide.</li>
 </ol>
-<pre class="r"><code>sydneybeaches_long_mean &lt;- sydneybeaches_long %&gt;%
-  group_by(site) %&gt;%
+<pre class="r"><code>sydneybeaches_long_mean &lt;- sydneybeaches_long_mmddyyyy %&gt;%
+  group_by(site, year) %&gt;%
   summarize(entercocci_mean=mean(enterococci_cfu_100ml, na.rm=TRUE)) %&gt;%
-  arrange(desc(entercocci_mean))
-sydneybeaches_long_mean</code></pre>
-<pre><code>## # A tibble: 11 x 2
-##    site                    entercocci_mean
-##    &lt;chr&gt;                             &lt;dbl&gt;
-##  1 Malabar Beach                      68.1
-##  2 South Maroubra Rockpool            63.9
-##  3 Little Bay Beach                   45.6
-##  4 Coogee Beach                       39.4
-##  5 Tamarama Beach                     35.7
-##  6 Bronte Beach                       31.4
-##  7 Gordons Bay (East)                 24.9
-##  8 Maroubra Beach                     20.2
-##  9 Bondi Beach                        18.8
-## 10 South Maroubra Beach               15.7
-## 11 Clovelly Beach                     10.2</code></pre>
+  arrange(desc(entercocci_mean))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;site&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>sydneybeaches_long_mean</code></pre>
+<pre><code>## # A tibble: 66 x 3
+## # Groups:   site [11]
+##    site                    year  entercocci_mean
+##    &lt;chr&gt;                   &lt;chr&gt;           &lt;dbl&gt;
+##  1 Little Bay Beach        2013            122. 
+##  2 South Maroubra Rockpool 2018            112. 
+##  3 Malabar Beach           2013            101. 
+##  4 South Maroubra Rockpool 2013             96.4
+##  5 Malabar Beach           2016             91.0
+##  6 Malabar Beach           2015             66.9
+##  7 Bronte Beach            2016             61.3
+##  8 Coogee Beach            2016             59.5
+##  9 South Maroubra Rockpool 2016             59.3
+## 10 Little Bay Beach        2018             59.1
+## # ... with 56 more rows</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Make the output from question 7 easier to read by pivoting it to wide format.</li>
 </ol>
 <pre class="r"><code>sydneybeaches_long_mean %&gt;%
   pivot_wider(names_from = &quot;site&quot;, values_from = &quot;entercocci_mean&quot;)</code></pre>
-<pre><code>## # A tibble: 1 x 11
-##   `Malabar Beach` `South Maroubra Rockpool` `Little Bay Beach` `Coogee Beach`
-##             &lt;dbl&gt;                     &lt;dbl&gt;              &lt;dbl&gt;          &lt;dbl&gt;
-## 1            68.1                      63.9               45.6           39.4
-## # ... with 7 more variables: Tamarama Beach &lt;dbl&gt;, Bronte Beach &lt;dbl&gt;,
-## #   Gordons Bay (East) &lt;dbl&gt;, Maroubra Beach &lt;dbl&gt;, Bondi Beach &lt;dbl&gt;,
-## #   South Maroubra Beach &lt;dbl&gt;, Clovelly Beach &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 6 x 12
+##   year  `Little Bay Beach` `South Maroubra Rockp~ `Malabar Beach` `Bronte Beach`
+##   &lt;chr&gt;              &lt;dbl&gt;                  &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+## 1 2013               122.                    96.4           101.            26.8
+## 2 2018                59.1                  112.             38.0           43.4
+## 3 2016                31.2                   59.3            91.0           61.3
+## 4 2015                25.5                   47.3            66.9           23.6
+## 5 2014                19.5                   40.6            54.5           17.5
+## 6 2017                18.2                   46.9            49.8           16.8
+## # ... with 7 more variables: Coogee Beach &lt;dbl&gt;, Tamarama Beach &lt;dbl&gt;,
+## #   Maroubra Beach &lt;dbl&gt;, South Maroubra Beach &lt;dbl&gt;, Gordons Bay (East) &lt;dbl&gt;,
+## #   Bondi Beach &lt;dbl&gt;, Clovelly Beach &lt;dbl&gt;</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>What was the most polluted beach in 2018?</li>
 </ol>

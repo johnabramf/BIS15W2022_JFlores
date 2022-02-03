@@ -53,7 +53,7 @@ sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor:
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
 
-**It is not tidy, as by the definiytion from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.**
+**It is not tidy, as by the definition from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.**
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 
@@ -93,8 +93,8 @@ sydneybeaches_long_mmddyyyy
 
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 ```{r}
-sydneybeaches_long_mean <- sydneybeaches_long %>%
-  group_by(site) %>%
+sydneybeaches_long_mean <- sydneybeaches_long_mmddyyyy %>%
+  group_by(site, year) %>%
   summarize(entercocci_mean=mean(enterococci_cfu_100ml, na.rm=TRUE)) %>%
   arrange(desc(entercocci_mean))
 sydneybeaches_long_mean

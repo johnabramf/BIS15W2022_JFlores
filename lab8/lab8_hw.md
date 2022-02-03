@@ -85,7 +85,7 @@ library(here)
 ```
 
 ```
-## here() starts at C:/Users/likea/Documents/GitHub/BIS15W2022_JFlores
+## here() starts at C:/Users/Default.DESKTOP-KQBUCHH/Desktop/BIS15W2022_JFlores
 ```
 
 The quotes show the folder structure from the root directory.
@@ -113,7 +113,7 @@ sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor:
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
 
-**It is not tidy, as by the definiytion from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.**
+**It is not tidy, as by the definition from tidyverse, we see that each variable does not have its own column, as although date, council, etc. fit, the site of where the data is taken is in one column. However, each observation does indeed have its own row, and each value does have its own cell.**
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 
@@ -229,28 +229,36 @@ sydneybeaches_long_mmddyyyy
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 
 ```r
-sydneybeaches_long_mean <- sydneybeaches_long %>%
-  group_by(site) %>%
+sydneybeaches_long_mean <- sydneybeaches_long_mmddyyyy %>%
+  group_by(site, year) %>%
   summarize(entercocci_mean=mean(enterococci_cfu_100ml, na.rm=TRUE)) %>%
   arrange(desc(entercocci_mean))
+```
+
+```
+## `summarise()` has grouped output by 'site'. You can override using the `.groups` argument.
+```
+
+```r
 sydneybeaches_long_mean
 ```
 
 ```
-## # A tibble: 11 x 2
-##    site                    entercocci_mean
-##    <chr>                             <dbl>
-##  1 Malabar Beach                      68.1
-##  2 South Maroubra Rockpool            63.9
-##  3 Little Bay Beach                   45.6
-##  4 Coogee Beach                       39.4
-##  5 Tamarama Beach                     35.7
-##  6 Bronte Beach                       31.4
-##  7 Gordons Bay (East)                 24.9
-##  8 Maroubra Beach                     20.2
-##  9 Bondi Beach                        18.8
-## 10 South Maroubra Beach               15.7
-## 11 Clovelly Beach                     10.2
+## # A tibble: 66 x 3
+## # Groups:   site [11]
+##    site                    year  entercocci_mean
+##    <chr>                   <chr>           <dbl>
+##  1 Little Bay Beach        2013            122. 
+##  2 South Maroubra Rockpool 2018            112. 
+##  3 Malabar Beach           2013            101. 
+##  4 South Maroubra Rockpool 2013             96.4
+##  5 Malabar Beach           2016             91.0
+##  6 Malabar Beach           2015             66.9
+##  7 Bronte Beach            2016             61.3
+##  8 Coogee Beach            2016             59.5
+##  9 South Maroubra Rockpool 2016             59.3
+## 10 Little Bay Beach        2018             59.1
+## # ... with 56 more rows
 ```
 
 
@@ -263,13 +271,18 @@ sydneybeaches_long_mean %>%
 ```
 
 ```
-## # A tibble: 1 x 11
-##   `Malabar Beach` `South Maroubra Rockpool` `Little Bay Beach` `Coogee Beach`
-##             <dbl>                     <dbl>              <dbl>          <dbl>
-## 1            68.1                      63.9               45.6           39.4
-## # ... with 7 more variables: Tamarama Beach <dbl>, Bronte Beach <dbl>,
-## #   Gordons Bay (East) <dbl>, Maroubra Beach <dbl>, Bondi Beach <dbl>,
-## #   South Maroubra Beach <dbl>, Clovelly Beach <dbl>
+## # A tibble: 6 x 12
+##   year  `Little Bay Beach` `South Maroubra Rockp~ `Malabar Beach` `Bronte Beach`
+##   <chr>              <dbl>                  <dbl>           <dbl>          <dbl>
+## 1 2013               122.                    96.4           101.            26.8
+## 2 2018                59.1                  112.             38.0           43.4
+## 3 2016                31.2                   59.3            91.0           61.3
+## 4 2015                25.5                   47.3            66.9           23.6
+## 5 2014                19.5                   40.6            54.5           17.5
+## 6 2017                18.2                   46.9            49.8           16.8
+## # ... with 7 more variables: Coogee Beach <dbl>, Tamarama Beach <dbl>,
+## #   Maroubra Beach <dbl>, South Maroubra Beach <dbl>, Gordons Bay (East) <dbl>,
+## #   Bondi Beach <dbl>, Clovelly Beach <dbl>
 ```
 
 
