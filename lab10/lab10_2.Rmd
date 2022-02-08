@@ -54,7 +54,7 @@ homerange <- read_csv(here("lab10", "data", "Tamburelloetal_HomeRangeDatabase.cs
 ```
 
 ## A few more useful aesthetics
-There are many options to create nice plots in ggplot. One useful trick is to store the plot as a new object and then experiment with geom's and aesthetics.
+There are many options to create nice plots in ggplot. One useful trick is to store the plot as a new object and then experiment with geom's and aesthetics.;
 ```{r}
 p <- homerange %>% 
   ggplot(aes(x= log10.mass, y= log10.hra))
@@ -132,16 +132,20 @@ For this practice, let's use the [palmerpenguins](https://allisonhorst.github.io
 
 1. Make a bar plot that shows counts of individuals by island. Fill by species, and try both a stacked bar plot and `position="dodge"`.
 ```{r}
-
+penguins %>%
+  ggplot(aes(x=island, fill=species))+geom_bar() + labs(title = "Penguin count and species by Island")
 ```
 
 ```{r}
-
+penguins %>%
+  ggplot(aes(x=island, fill=species))+geom_bar(position="dodge") + labs(title = "Penguin count and species by Island")
 ```
 
 2. What are the number of individuals separated by sex on each island?
 ```{r}
-
+penguins %>%
+  filter(!sex=="NA") %>%
+  ggplot(aes(x=sex, fill=island)) +geom_bar(position="dodge") +labs(title="Penguin count by sex and island") +theme(plot.title=element_text(size=rel(1.25), hjust=0.5))
 ```
 
 ## Using `group`
