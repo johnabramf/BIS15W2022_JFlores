@@ -151,6 +151,10 @@ penguins %>%
 ## Using `group`
 In addition to `fill`, `group` is an aesthetic that accomplishes the same function but does not add color.
 
+```{r}
+glimpse(homerange)
+```
+
 Here is a box plot that shows `log10.mass` by taxonomic `class.`
 ```{r}
 homerange %>% 

@@ -1,10 +1,11 @@
 ---
 title: "Data Visualization: `ggplot` part 3"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -32,6 +33,7 @@ library(RColorBrewer)
 library(paletteer)
 library(janitor)
 library(here)
+library(ggthemes)
 ```
 
 ```{r}
@@ -55,7 +57,7 @@ p
 ```
 
 ```{r}
-p+theme_linedraw()+
+p+theme_hc()+
   theme(axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,
@@ -87,7 +89,7 @@ ls("package:ggthemes")[grepl("theme_", ls("package:ggthemes"))]
 ```
 
 ```{r}
-p+ theme_pander()+
+p+ theme_solarized_2 +
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
@@ -134,6 +136,10 @@ colors <- paletteer::palettes_d_names
 Now we can display the palettes. Assign the palette to `my_palette` and then build this base R bar plot. There are a lot of options; `paleteer` is a collection of popular palettes. I really like the [`ggsci` package] (https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html)
 ```{r}
 my_palette <- paletteer_d("ggsci::hallmarks_light_cosmic")
+```
+
+```{r}
+my_palette <- paletteer_d("beyonce::X2")
 ```
 
 ```{r}
