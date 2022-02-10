@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Homework"
 author: "John Abram Flores"
-date: "2022-02-09"
+date: "2022-02-10"
 output:
   html_document: 
     theme: spacelab
@@ -350,7 +350,8 @@ deserts %>%
 
 ```r
 deserts %>%
-  filter(species=="albigula" & !is.na(weight) & !is.na(hindfoot_length)) %>%
+  filter(species=="albigula" | species=="spectabilis") %>%
+  filter(!is.na(weight) & !is.na(hindfoot_length) & !is.na(sex)) %>%
   mutate(weight_to_hindfoot_ratio=weight/hindfoot_length) %>%
   ggplot(aes(x=species, y=weight_to_hindfoot_ratio, fill=sex)) +geom_boxplot() +labs(title="Ranges of Rodent albigula weight:hindfoot length ratios by sex", y="Weight to Hindfoot ratio")
 ```
