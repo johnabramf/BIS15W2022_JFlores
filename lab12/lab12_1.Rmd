@@ -2,10 +2,11 @@
 title: "Joins and Lubridate"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
 ---
 
 ```{r setup, include = FALSE}
@@ -60,6 +61,7 @@ class(spider_list[[3]])
 ## Practice
 1. Getting an idea of the structure of lists is a bit tricky, especially when there are many elements. Try exploring the elements in `spider_list` using names(), str(), or glimpse(). For names(), you will need to specify an element using [[]].  
 ```{r}
+names(spider_list[[6]])
 
 ```
 
@@ -88,7 +90,7 @@ names(spider_list)
 ## Practice
 1. Now that our list elements are named, how could we access the Butte County data by name?
 ```{r}
-
+spider_list$Butte
 ```
 
 ## Merging Files
@@ -173,17 +175,18 @@ We will use a join here to merge lat/long to our data frame. Both files contain 
 ## Practice
 1. Which type of join is most appropriate in this case?  
 ```{r}
-
+spiders_with_locs<- left_join(spiders_locs, spiders_all, by="Accession")
+spiders_with_locs
 ```
 
-As a side note, joining data can highlight problems or typos with the data when the join does not go as expected.  
+As a side note, joining data can highlight problems or typos with the data when the join does not go as expected. 
 
 ## Formatting Dates
 We now have a single data frame with all of our spider data including locations. That was a lot of work, even with R. But remember, now we have a reproducible work flow starting from the original files. This work flow serves as a record of what we did, keeps the original files untouched, and can make it easier to track down problems later in our analysis. Most importantly, everyone who uses our R script will know exactly what we did!  
 
 There is one last thing to change. Did you notice the date column? It seems to be in the format Day/Month/Year. 
 ```{r}
-#class(spiders_with_locs$Date)
+class(spiders_with_locs$Date)
 ```
 
 The `lubridate` package was specifically created to deal with dates of all types. There are many useful functions in `lubridate` for working with dates. Please see the excellent tutorial provided by [RichardOnData](https://www.youtube.com/watch?v=VYAo69WdJZg&ab_channel=RichardOnData).
@@ -202,7 +205,7 @@ datetime
 
 We want to change our date column to the standard "YEAR-MO-DA" format that R will recognize as a date. Right now it is listed as day-month-year. We can use the base R function `as.Date()` or the lubridate function `dmy` for this. 
 ```{r}
-#dmy(spiders_with_locs$Date)
+dmy(spiders_with_locs$Date)
 ```
 
 If you want to use base R, then here is the format.
@@ -222,6 +225,13 @@ dateformat5 <- "20200922 170000"
 ## Practice 
 1. Convert each of the examples above using lubridate.
 
+```{r}
+ymd(dateformat1)
+mdy(dateformat2)
+dmy(dateformat3)
+mdy_hms(dateformat4)
+ymd_hms(dateformat5)
+```
 
 2. Have a look at these options.
 ```{r}
@@ -237,7 +247,7 @@ wday(datetime, label=T)
 ## Export for part 2  
 We need to save our final data to a `.csv` so we can use it in part 2. 
 ```{r}
-#write.csv(spiders_with_locs, file = "spiders_with_locs.csv", row.names = FALSE)
+write.csv(spiders_with_locs, file = "spiders_with_locs.csv", row.names = FALSE)
 ```
 
 ## Installs for part 2  
@@ -246,7 +256,7 @@ It will be very helpful if you can install the following packages before the nex
 ```{r}
 #install.packages("devtools")
 #library(devtools)
-#devtools::install_github("dkahle/ggmap")
+#devtools::install_github("dkahle/ggmap", force=TRUE)
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  
