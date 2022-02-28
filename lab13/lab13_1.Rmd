@@ -50,6 +50,7 @@ A shiny app consists of a user interface (ui) function, server function, and run
 3. The `run` function combines the ui and server function to run the app.  
 
 Below is a bare bones shiny app. You can get this code snippet by typing `shinyapp`. It doesn't do anything because we haven't created any inputs with the ui or any outputs with the server. Copy and paste the code or get it by typing `shinyapp`, and hit shift+tab.  
+
 ```{r}
 library(shiny)
 
@@ -72,6 +73,11 @@ There are many types of inputs in shiny, see the [shiny cheat sheet](https://shi
 Let's get the names of the `palmerpenguins` data frame and add them as a `selectInput()` to our ui. `selectInput()` takes several arguments including the label that the server function will use, the label that will display to the user, the selection choices, and the initially selected choice.  
 ```{r}
 names(penguins)
+```
+
+```{r}
+penguins %>%
+  ggplot(aes(x=flipper_length_mm, y=body_mass_g)) +geom_point() +theme_linedraw()
 ```
 
 We won't use the name `species` because that will be the `ggplot` grouping variable. Copy and paste the code below and run the app to see our new input. 
@@ -170,6 +176,23 @@ homerange %>%
 ```
 
 2. Build a shiny app that produces a barplot that explores `locomotion` type with a fill reaction for the variables `trophic.guild` and `thermoregulation`.  
+
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  
+  radioButtons("x", "Select fill variable", choices = c("trophic.guild", "thermoregulation"), selected="trophic.guild"),
+  plotOutput("plot", width="600px", height="500px"))
+
+server <- function(input, output, session) {
+  output$plot <- renderPlot({ggplot(homerange, aes_string(x="locomotion", fill=input$x))+geom_bar(position="dodge", color="black", alpha=0.8) + theme_linedraw()})
+  
+}
+
+shinyApp(ui, server)
+```
+
 ```{r}
 library(shiny)
 
@@ -190,28 +213,6 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
-
-```{r}
-library(shiny)
-
-ui <- fluidPage(titlePanel("Homerange Locomotion"),
-                radioButtons("x", "Select Fill Variable", choices=c("trophic.guild", "thermoregulation"), selected="trophic.guild"),
-                plotOutput("plot", width="600px", height="500px")
-)
-
-server <- function(input, output, session) {
-  output$plot <- renderPlot({
-    ggplot(homerange, aes_string(x="locomotion", fill=input$x)) +
-      geom_bar(position="dodge", alpha=0.8, color="black") +
-      theme_light(base_size=18) +
-      labs(x=NULL, y=NULL, fill="guild or thermo")
-  })
-  
-}
-
-shinyApp(ui, server)
-```
-
 3. The app below adds some nicer aesthetics. It makes a density plot of `log10.hra` with `taxon` as a reactive variable. Edit the app to explore log10.hra by locomotion type.  
 
 ```{r}
@@ -261,7 +262,7 @@ shinyApp(ui, server)
 ## Packages for next time  
 Please install shinydashboard below for part 2!  
 ```{r}
-#install.packages("shinydashboard")
+install.packages("shinydashboard")
 ```
 
 ## That's it, let's take a break!   
