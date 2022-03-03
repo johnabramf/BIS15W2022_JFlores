@@ -3,7 +3,7 @@ title: "Lab 14 HW"
 output: 
   html_document: 
     keep_md: yes
-author: "your name here"
+author: "John Abram Flores"
 date: '2022-02-28'
 ---
 
@@ -38,38 +38,53 @@ beachbugs_long <- readr::read_csv("data/beachbugs_long.csv")
 Clean up the column names (no capitals, not spaces) of `superhero_info`, then use 2 functions to remind yourself of structure of the `superhero_info` data set.
 
 ```{r}
+superhero_info <- clean_names(superhero_info)
+```
 
+```{r}
+glimpse(superhero_info)
+skimr::skim(superhero_info)
 ```
 
 ### 2.
 Are bad guys bigger? Make box-plots of weight by `alignment` (alignment on the x-axis).
 ```{r}
-
+superhero_info %>%
+  filter(!is.na(alignment)) %>%
+  ggplot(aes(x=alignment, y=weight, fill=alignment)) +geom_boxplot(alpha=0.5)
 ```
 
 ### 3. 
 Now, make a violin plot of weight by `alignment` (alignment on the x-axis). Add some color!
   What information can you observe in the violin plot that was not visible in the boxplot?
 ```{r}
-
+superhero_info %>%
+  filter(!is.na(alignment)) %>%
+  ggplot(aes(x=alignment, y=weight, fill=alignment)) +geom_violin(alpha=0.5)
 ```
-
 
 
 ### 4. 
 Use `alpha = .5` in `geom_boxplot()` and `geom_violin()` to layer both plots on top of one another. What does this tell you about the distribution of weight in "`bad`" guys?
 ```{r}
-
+superhero_info %>%
+  filter(!is.na(alignment)) %>%
+  ggplot(aes(x=alignment, y=weight, fill=alignment)) +geom_boxplot(alpha=0.5) +geom_violin(alpha=0.5) +labs(title="Distribution of superhero/villian weight by alignment")
 ```
 
 ### 5. 
 Box plots are great for showing how the distribution of a numeric variable (e.g. weight) varies among a categorical variable (e.g. alignment).
   Make your own violin plot with the superhero data. 
   What is your numeric data? 
+  **height**
   What is your categorical variable?
+  **publisher**
+
 
 ```{r}
-
+superhero_info %>%
+  filter(!is.na(height) & !is.na(hair_color)) %>%
+  ggplot(aes(x=hair_color, y=height, fill=hair_color)) +geom_boxplot(alpha=0.5) +geom_violin(alpha=0.5) +labs(title="Distribution of superhero/villian height by hair color") +coord_flip()
 ```
 
 ### 6. 
