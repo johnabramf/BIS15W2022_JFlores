@@ -93,16 +93,17 @@ color it with `scale_fill_gradient(low="yellow", high="red")` or colors of your 
 (dont forget, `coord_flip()` is a quick way to improve the look of your plot if you dont like the default orientation)
 
 ```{r}
-
+glimpse(beachbugs_long)
 ```
 
 ```{r}
-
+beachbugs_long %>%
+  ggplot(aes(x=year, y=site, fill=buglevels)) +geom_tile() +scale_fill_gradient(low="green", high="red")
 ```
 
 ### 7.  
 Use the provided code to normalize the beachbug data set. 
-Then make a heatmap with the `beachbugs_normalized` data, and use the same color chois as above. Which heatmap do you think is more informative? why?
+Then make a heatmap with the `beachbugs_normalized` data, and use the same color choices as above. Which heatmap do you think is more informative? why?
 
 ```{r}
 #makes a new column of the highest buglevel observed at each site
@@ -122,7 +123,8 @@ beachbugs_normalized
 ```
  
 ```{r}
-
+beachbugs_normalized %>%
+  ggplot(aes(x=year, y=site, fill=norm_buglevel)) +geom_tile() +scale_fill_gradient(low="green", high="red")
 ```
 
 ### 8.
@@ -136,50 +138,70 @@ Start by making the 4 vectors, then the list of vectors. The vector for alignmen
 ### super heros venn
 ```{r}
 # evil
-
-#evil_vec <- superhero_info %>%
-#  filter(alignment == "bad")%>%
-#  pull(name)
+evil_vec <- superhero_info %>%
+  filter(Alignment=="bad") %>%
+  pull(name)
 
 # red eyes
-
+redeye_vec <- superhero_info %>%
+  filter(`Eye color`=="red") %>%
+  pull(name)
 
 # male
 
+male_vec <- superhero_info %>%
+  filter(Gender=="Male") %>%
+  pull(name)
 
 # bald
 
+bald_vec <- superhero_info %>%
+  filter(`Hair color`=="No Hair") %>%
+  pull(name)
 
 ```
 
 Your list of vectors will look something like this:
 ```{r}
-# questions_list <- list(evil_vec, red_eye_vec, male_vec, bald_vec)
-
+questions_list <- list(evil_vec, redeye_vec, male_vec, bald_vec)
 ```
 
 ### 9. 
 Let's make the venn diagram! use the code from lab as a reference. 
 ```{r}
-# something like:
-# ggVennDiagram( list, category.names = c("name", "name", "name", "name"))
-
-
-
+ggVennDiagram(questions_list, category.names = c("Evil", "Red Eyes", "Male", "Bald"))
 ```
 
 
 ### 10. Choose one intersection of the venn diagram that is interesting to you. Use dplyr to find the names of the superheros in that intersection. 
 
 ```{r}
-
+superhero_info %>%
+  filter(Gender!="Male" & Alignment=="bad" & `Eye color`=="red" & `Hair color`!="No Hair") 
 ```
 
 
 
 ### 11. Make another venn diagram with the `superhero_info` data. What are your questions? ( At least 2!) 
 ```{r}
+# Tall?
+very_tall_vec <- superhero_info %>%
+  filter(Height>=200) %>%
+  pull(name)
+# Has hair?
+has_hair_vec <- superhero_info %>%
+  filter(`Hair color`!="No Hair") %>%
+  pull(name)
+#Good?
+good_vec <- superhero_info %>%
+  filter(Alignment=="good") %>%
+  pull(name)
 
+Bruh_vec <- list(very_tall_vec, has_hair_vec, good_vec)
+```
+
+```{r}
+ggVennDiagram(Bruh_vec, category.names=c("Very tall", "Has Hair", "Good"))
 ```
 
 
@@ -193,6 +215,7 @@ Remember, you can change `scale_size_area(max_size = 20)` to a different number 
 ```{r}
 head(superhero_powers)
 ```
+
 ```{r}
 power_frequency <- superhero_powers %>% 
   select(-hero_names) %>%
@@ -203,9 +226,12 @@ power_frequency
 
 
 ```{r}
-
-
-
+power_frequency %>%
+  ggplot(aes(
+  label = power, 
+  size = freq,
+  color = power
+  )) +geom_text_wordcloud() +theme_minimal()
 ```
 ### 13.  
 Who are some very powerful supers? 
@@ -234,8 +260,12 @@ power_quantity
 
 
 ```{r}
-
-
+power_quantity %>%
+  ggplot(aes(
+  label = hero_names, 
+  size = sum_powers,
+  color = hero_names
+  )) +geom_text_wordcloud() +theme_minimal()
 ```
 
 ## That's it! 🎉
